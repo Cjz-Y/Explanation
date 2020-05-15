@@ -23,7 +23,7 @@ urlpatterns = [
 
     path('', views.index),
 
-
+    path('lime_demo', views.lime_demo),
 
     path('hello/', views.say_hi),
 

@@ -4,6 +4,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from ExplanationServer.settings import LIME_EXPLANATION
+
 
 def index(request):
     return render(request, 'index.html')
@@ -19,14 +21,16 @@ def lime_demo(request):
         return render(request, 'index.html')
     else:
         display_type = int(request.POST.get('display_type', '-1'))
-        if display_type == -1:
-            pass
-        elif display_type == 1:
-            pass
+        if display_type == 1:
+            return LIME_EXPLANATION.predict_proba()
         elif display_type == 2:
-            pass
-        else:
-            pass
+            return LIME_EXPLANATION.feature_list()
+        elif display_type == 3:
+            return LIME_EXPLANATION.feature_max()
+        elif display_type == 4:
+            return LIME_EXPLANATION.feature_value()
+
+        return render(request, 'index.html')
 
         # try:
         #     display_type = request.POST['display_type']
