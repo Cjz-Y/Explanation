@@ -8,6 +8,7 @@ import numpy as np
 import lime.lime_tabular
 import pandas as pd
 import xgboost
+import joblib
 from interpreter.lime.utils.insurance_dataset import InsuranceDataset
 from interpreter.lime.utils.base import encode_onehot, split_sample
 from interpreter.lime.common.constant import *
@@ -36,6 +37,7 @@ class Model():
         # fit
         rf.fit(encoded_train, labels_train)
 
+
         explainer = lime.lime_tabular.LimeTabularExplainer(training_data=train,
                                                            feature_names=FEATURE_NAMES,
                                                            class_names=class_names,
@@ -55,11 +57,15 @@ class Model():
 
         self.encode_onehot.fit(data)
         encoded_train = self.encode_onehot.transform(train)
+        # save model to file
+        if not os.path.exists(MODEL_XGBOOST):
+            # use gradient boosted trees as the model
+            gbtree = xgboost.XGBClassifier(n_estimators=300, max_depth=5)
+            gbtree.fit(encoded_train, labels_train)
+            joblib.dump(gbtree, MODEL_XGBOOST)
 
-        # use gradient boosted trees as the model
-        gbtree = xgboost.XGBClassifier(n_estimators=300, max_depth=5)
-        gbtree.fit(encoded_train, labels_train)
-
+        # load model from file
+        gbtree = joblib.load(MODEL_XGBOOST)
         # accuracy score
         acc_score = sklearn.metrics.accuracy_score(labels_test, gbtree.predict(self.encode_onehot.transform(test)))
 
