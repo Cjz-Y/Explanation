@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
 from ExplanationServer.settings import LIME_EXPLANATION
@@ -22,13 +22,13 @@ def lime_demo(request):
     else:
         display_type = int(request.POST.get('display_type', '-1'))
         if display_type == 1:
-            return HttpResponse(LIME_EXPLANATION.predict_proba())
+            return JsonResponse(LIME_EXPLANATION.predict_proba())
         elif display_type == 2:
-            return HttpResponse(LIME_EXPLANATION.feature_list())
+            return JsonResponse(LIME_EXPLANATION.feature_list())
         elif display_type == 3:
-            return HttpResponse(LIME_EXPLANATION.feature_max())
+            return JsonResponse(LIME_EXPLANATION.feature_max())
         elif display_type == 4:
-            return HttpResponse(LIME_EXPLANATION.feature_value())
+            return JsonResponse(LIME_EXPLANATION.feature_value())
 
         return render(request, 'index.html')
 
