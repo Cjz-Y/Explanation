@@ -1,21 +1,22 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Home</title>
+<title>Lime</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="/static/css/main.css" />
+<link rel="stylesheet" href="/static/lib/layui/css/layui.css" />
 </head>
 <body>
 
 <!-- Header -->
 <header id="header">
 	<div class="inner">
-		<a href="index.html" class="logo">Theory</a>
+		<a href="/" class="logo">Lime</a>
 		<nav id="nav">
-			<a href="index.html">Home</a>
-			<a href="generic.html">Generic</a>
-			<a href="elements.html">Elements</a>
+			<a href="/">Home</a>
+			<a href="/">Lime</a>
+			<a href="/">Demo</a>
 		</nav>
 		<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
 	</div>
@@ -106,21 +107,13 @@
 <section id="three" class="wrapper special">
 	<div class="inner">
 		<header class="align-center">
-			<h2>Nunc Dignissim</h2>
-			<p>Aliquam erat volutpat nam dui </p>
+			<h2>Demo</h2>
+			<p>demo demo demo</p>
 		</header>
+
 		<div class="flex flex-2">
 			<article>
-				<div class="image fit">
-					<img src="/static/images/pic01.jpg" alt="Pic 01" />
-				</div>
-				<header>
-					<h3>Praesent placerat magna</h3>
-				</header>
-				<p>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor lorem ipsum.</p>
-				<footer>
-					<a href="#" class="button special">More</a>
-				</footer>
+				<div id="chart1" style="width:100%; height:100%;"></div>
 			</article>
 			<article>
 				<div class="image fit">
@@ -158,9 +151,98 @@
 
 <!-- Scripts -->
 <script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/echarts.min.js"></script>
+<script src="/static/lib/layui/layui.all.js"></script>
 <script src="/static/js/skel.min.js"></script>
 <script src="/static/js/util.js"></script>
 <script src="/static/js/main.js"></script>
+<script>
+    $(function(){
+        window.onscroll = function () {
+            //console.log(document.documentElement.scrollTop);
+            var scrollTop = document.documentElement.scrollTop;
+            /*1.默认的透明度*/
+            var opacity = 0;
+            if (scrollTop > '50') {
+                /*2.当页面滚动的时候---随着页面卷曲的高度变大透明度变大*/
+                //opacity = scrollTop / height * 0.85;
+                $('#header').addClass('heads');
+            } else {
+                /*3.当页面滚动的时候---超过某一个高度的时候透明度不变*/
+                //opacity = 0.85;
+                $('#header').removeClass('heads');
+            }
+            //searchBox.style.background = 'rgba(201,21,35,' + opacity + ')';
+        }
 
+        var myChart = echarts.init(document.getElementById('chart1'));
+
+        var labelRight = {
+            position: 'right'
+        };
+        var option = {
+            title: {
+                text: '交错正负轴标签',
+                subtext: 'From ExcelHome',
+                sublink: 'http://e.weibo.com/1341556070/AjwF2AgQm'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                top: 80,
+                bottom: 30
+            },
+            xAxis: {
+                type: 'value',
+                position: 'top',
+                splitLine: {
+                    lineStyle: {
+                        type: 'dashed'
+                    }
+                }
+            },
+            yAxis: {
+                type: 'category',
+                axisLine: {show: false},
+                axisLabel: {show: false},
+                axisTick: {show: false},
+                splitLine: {show: false},
+                data: ['ten', 'nine', 'eight', 'seven', 'six', 'five', 'four', 'three', 'two', 'one']
+            },
+            series: [
+                {
+                    name: '影响力',
+                    type: 'bar',
+                    stack: '总量',
+                    label: {
+                        show: true,
+                        formatter: '{b}'
+                    },
+                    data: [
+                        {value: -0.07, label: labelRight},
+                        {value: -0.09, label: labelRight},
+                        0.2, 0.44,
+                        {value: -0.23, label: labelRight},
+                        0.08,
+                        {value: -0.17, label: labelRight},
+                        0.47,
+                        {value: -0.36, label: labelRight},
+                        0.18
+                    ]
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+
+
+
+    })
+
+</script>
 </body>
 </html>

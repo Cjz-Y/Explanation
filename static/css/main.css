@@ -2735,6 +2735,11 @@
 		width: 100%;
 		z-index: 10001;
 	}
+    .heads{
+		top:0 !important;
+        position: fixed !important;
+        background: #00000070 !important;
+    }
 
 		#header .inner {
 			margin: 0 auto;
