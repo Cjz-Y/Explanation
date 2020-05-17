@@ -61,6 +61,7 @@
 				$('#navPanel')
 					.css('transition', 'none');
 
+
 	});
 
 })(jQuery);
