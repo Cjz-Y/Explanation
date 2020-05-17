@@ -42,7 +42,13 @@ class Predict():
             example:[('0.00 < HHInsurance <= 1.00', -0.34299729931535844), ('CarLoan <= 0.00', 0.20479311844631276)]
         :return:
         """
-        return self.model_predict.as_list()
+        list = self.model_predict.as_list()
+
+        result = {}
+        for item in list:
+            result[item[0]] = item[1]
+
+        return result
 
     def feature_max(self):
         """
@@ -54,16 +60,22 @@ class Predict():
         exp_list = self.feature_list()
 
         # turn list into dict
-        exp_dict = {}
-        for exp in exp_list:
-            exp_dict[exp[0]] = exp[1]
+        exp_dict = exp_list
+        # for exp in exp_list.items():
+        #     exp_dict[exp[0]] = exp[1]
 
         feature_max_pos = max(exp_dict.keys(), key=(lambda x: exp_dict[x]))
         feature_max_neg = min(exp_dict.keys(), key=(lambda x: exp_dict[x]))
-        class_names = self.model_predict.class_names
-        feature_max_keys = [feature_max_neg,feature_max_pos]
-        feature_max_values = [exp_dict[feature_max_neg],exp_dict[feature_max_pos]]
-        return list(zip(class_names, feature_max_keys, feature_max_values))
+
+        result = {}
+
+        result['0'] = {feature_max_neg: exp_dict[feature_max_neg]}
+        result['1'] = {feature_max_pos: exp_dict[feature_max_pos]}
+
+        # class_names = self.model_predict.class_names
+        # feature_max_keys = [feature_max_neg,feature_max_pos]
+        # feature_max_values = [exp_dict[feature_max_neg],exp_dict[feature_max_pos]]
+        return result
 
     def feature_value(self):
         """
