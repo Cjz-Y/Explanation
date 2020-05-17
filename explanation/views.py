@@ -22,13 +22,13 @@ def lime_demo(request):
     else:
         display_type = int(request.POST.get('display_type', '-1'))
         if display_type == 1:
-            return LIME_EXPLANATION.predict_proba()
+            return HttpResponse(LIME_EXPLANATION.predict_proba())
         elif display_type == 2:
-            return LIME_EXPLANATION.feature_list()
+            return HttpResponse(LIME_EXPLANATION.feature_list())
         elif display_type == 3:
-            return LIME_EXPLANATION.feature_max()
+            return HttpResponse(LIME_EXPLANATION.feature_max())
         elif display_type == 4:
-            return LIME_EXPLANATION.feature_value()
+            return HttpResponse(LIME_EXPLANATION.feature_value())
 
         return render(request, 'index.html')
 
