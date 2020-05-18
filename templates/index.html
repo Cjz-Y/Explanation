@@ -6,6 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="/static/css/main.css" />
 <link rel="stylesheet" href="/static/lib/layui/css/layui.css" />
+<style>
+    .layui-input-block{margin:0;}
+    .flex{margin-bottom:40px;}
+    dl dd{margin-left:0;text-align:left;}
+</style>
 </head>
 <body>
 
@@ -14,9 +19,9 @@
 	<div class="inner">
 		<a href="/" class="logo">Lime</a>
 		<nav id="nav">
-			<a href="/">Home</a>
-			<a href="/">Lime</a>
-			<a href="/">Demo</a>
+			<a href="#home">Home</a>
+			<a href="#lime">Lime</a>
+			<a href="#demo">Demo</a>
 		</nav>
 		<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
 	</div>
@@ -29,34 +34,36 @@
 </section>
 
 <!-- One -->
+<a href="#" name="home"></a>
 <section id="one" class="wrapper">
+    <a href="#" name="home"></a>
 	<div class="inner">
 		<div class="flex flex-3">
 			<article>
 				<header>
-					<h3>Magna tempus sed amet<br /> aliquam veroeros</h3>
+					<h3>home</h3>
 				</header>
-				<p>Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu.</p>
+				<p>home</p>
 				<footer>
-					<a href="#" class="button special">More</a>
+					<a href="#" class="button special">home</a>
 				</footer>
 			</article>
 			<article>
 				<header>
-					<h3>Interdum lorem pulvinar<br /> adipiscing vitae</h3>
+					<h3>home</h3>
 				</header>
-				<p>Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu.</p>
+				<p>home</p>
 				<footer>
-					<a href="#" class="button special">More</a>
+					<a href="#" class="button special">home</a>
 				</footer>
 			</article>
 			<article>
 				<header>
-					<h3>Libero purus magna sapien<br /> sed ullamcorper</h3>
+					<h3>home</h3>
 				</header>
-				<p>Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu.</p>
+				<p>home</p>
 				<footer>
-					<a href="#" class="button special">More</a>
+					<a href="#" class="button special">home</a>
 				</footer>
 			</article>
 		</div>
@@ -64,70 +71,97 @@
 </section>
 
 <!-- Two -->
+<a href="#" name="lime"></a>
 <section id="two" class="wrapper style1 special">
 	<div class="inner">
 		<header>
-			<h2>Ipsum Feugiat</h2>
-			<p>Semper suscipit posuere apede</p>
+			<h2>Lime</h2>
+			<p>Lime Lime Lime Lime</p>
 		</header>
 		<div class="flex flex-4">
-			<div class="box person">
-				<div class="image round">
-					<img src="/static/images/pic03.jpg" alt="Person 1" />
-				</div>
-				<h3>Magna</h3>
-				<p>Cipdum dolor</p>
-			</div>
-			<div class="box person">
-				<div class="image round">
-					<img src="/static/images/pic04.jpg" alt="Person 2" />
-				</div>
-				<h3>Ipsum</h3>
-				<p>Vestibulum comm</p>
-			</div>
-			<div class="box person">
-				<div class="image round">
-					<img src="/static/images/pic05.jpg" alt="Person 3" />
-				</div>
-				<h3>Tempus</h3>
-				<p>Fusce pellentes</p>
-			</div>
-			<div class="box person">
-				<div class="image round">
-					<img src="/static/images/pic06.jpg" alt="Person 4" />
-				</div>
-				<h3>Dolore</h3>
-				<p>Praesent placer</p>
-			</div>
+
 		</div>
 	</div>
 </section>
 
 <!-- Three -->
+<a href="#" name="demo"></a>
 <section id="three" class="wrapper special">
 	<div class="inner">
 		<header class="align-center">
 			<h2>Demo</h2>
 			<p>demo demo demo</p>
 		</header>
-
-		<div class="flex flex-2">
-			<article>
-				<div id="chart1" style="width:100%; height:100%;"></div>
+        <div class="layui-form-item" style="width: 300px; margin: 0 auto 50px;">
+{#            <label class="layui-form-label"></label>#}
+            <div class="layui-input-block">
+                <form class="layui-form">
+                    <select name="type" lay-filter="select1">
+                        <option value="1">全部显示</option>
+                        <option value="2">显示所有的造成影响的属性和影响力</option>
+                        <option value="3">只显示影响最大的属性和影响力</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+        <div class="flex bbox1">
+            <article style="width:100%;">
+                <h3>Prediction probabilities</h3>
+				<div class="layui-progress layui-progress-big" lay-showPercent="true" lay-filter="demo1" style="margin:20px 0;">
+                  <div class="layui-progress-bar" lay-percent="0" id="demo1"></div>
+                </div>
+                <div class="layui-progress layui-progress-big" lay-showPercent="true" lay-filter="demo2">
+                  <div class="layui-progress-bar layui-bg-blue" lay-percent="0" id="demo2"></div>
+                </div>
 			</article>
-			<article>
-				<div class="image fit">
-					<img src="/static/images/pic02.jpg" alt="Pic 02" />
-				</div>
-				<header>
-					<h3>Fusce pellentesque tempus</h3>
-				</header>
-				<p>Sed adipiscing ornare risus. Morbi est est, blandit sit amet, sagittis vel, euismod vel, velit. Pellentesque egestas sem. Suspendisse commodo ullamcorper magna non comodo sodales tempus.</p>
-				<footer>
-					<a href="#" class="button special">More</a>
-				</footer>
+        </div>
+		<div class="flex flex-2">
+			<article class="bbox2">
+                <table class="layui-table">
+                  <thead>
+                    <tr>
+                      <th>Feature</th>
+                      <th>Value</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbods1">
+                    {% comment %}<tr>
+                      <td>贤心</td>
+                      <td>2016-11-29</td>
+                    </tr>
+                    <tr>
+                      <td>许闲心</td>
+                      <td>2016-11-28</td>
+                    </tr>{% endcomment %}
+                  </tbody>
+                </table>
+			</article>
+			<article class="bbox3">
+				<table class="layui-table">
+                  <thead>
+                    <tr>
+                      <th>Feature</th>
+                      <th>Value</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbods2">
+                    {% comment %}<tr>
+                      <td>贤心</td>
+                      <td>2016-11-29</td>
+                    </tr>
+                    <tr>
+                      <td>许闲心</td>
+                      <td>2016-11-28</td>
+                    </tr>{% endcomment %}
+                  </tbody>
+                </table>
 			</article>
 		</div>
+        <div class="flex bbox4">
+            <article style="width:100%; height:500px;">
+                <div id="chart1" style="width:100%; height:100%;"></div>
+			</article>
+        </div>
 	</div>
 </section>
 
@@ -136,7 +170,7 @@
 	<div class="inner">
 		<div class="flex">
 			<div class="copyright">
-				Copyright &copy; 2016.Company name All rights reserved.<a target="_blank" href="http://www.freemoban.com/">www.freemoban.com</a>
+				Copyright &copy; 2016.Company name All rights reserved.
 			</div>
 			<ul class="icons">
 				<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
@@ -157,6 +191,64 @@
 <script src="/static/js/util.js"></script>
 <script src="/static/js/main.js"></script>
 <script>
+    var labelRight = {
+        position: 'right'
+    };
+    var option = {
+        title: {
+            text: '影响力-交错正负轴标签',
+            left:'center'
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        grid: {
+            top: 80,
+            bottom: 30
+        },
+        xAxis: {
+            type: 'value',
+            position: 'top',
+            splitLine: {
+                lineStyle: {
+                    type: 'dashed'
+                }
+            }
+        },
+        yAxis: {
+            type: 'category',
+            axisLine: {show: false},
+            axisLabel: {show: false},
+            axisTick: {show: false},
+            splitLine: {show: false},
+            data: ['ten', 'nine', 'eight', 'seven', 'six', 'five', 'four', 'three', 'two', 'one']
+        },
+        series: [
+            {
+                name: '影响力',
+                type: 'bar',
+                stack: '总量',
+                label: {
+                    show: true,
+                    formatter: '{b}'
+                },
+                data: [
+                    {value: -0.07, label: labelRight},
+                    {value: -0.09, label: labelRight},
+                    0.2, 0.44,
+                    {value: -0.23, label: labelRight},
+                    0.08,
+                    {value: -0.17, label: labelRight},
+                    0.47,
+                    {value: -0.36, label: labelRight},
+                    0.18
+                ]
+            }
+        ]
+    };
     $(function(){
         window.onscroll = function () {
             //console.log(document.documentElement.scrollTop);
@@ -175,69 +267,142 @@
             //searchBox.style.background = 'rgba(201,21,35,' + opacity + ')';
         }
 
-        var myChart = echarts.init(document.getElementById('chart1'));
+        layui.use(['form','element'], function(){
+            var $ = layui.jquery
+            ,element = layui.element //Tab的切换功能，切换事件监听等，需要依赖element模块
+            ,form = layui.form;       //form
 
-        var labelRight = {
-            position: 'right'
-        };
-        var option = {
-            title: {
-                text: '交错正负轴标签',
-                subtext: 'From ExcelHome',
-                sublink: 'http://e.weibo.com/1341556070/AjwF2AgQm'
-            },
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            $.ajax({
+                url:'/lime_demo',
+                type:'post',
+                data:{display_type:1},
+                success:function(msg){
+                    console.log(msg)
+                    var demo1 = msg[0]*100;
+                    var demo2 = msg[1]*100;
+
+                    demo1 = demo1.toFixed(0) + '%';
+                    demo2 = demo2.toFixed(0) + '%';
+
+                    $("#demo1").attr('lay-percent','0：' + demo1);
+                    $("#demo2").attr('lay-percent','1：' + demo2);
+
+                    element.init();
+                    element.progress('demo1', demo1);
+                    element.progress('demo2', demo2);
+
+                },
+                error:function(err){
+                    console.log(err)
                 }
-            },
-            grid: {
-                top: 80,
-                bottom: 30
-            },
-            xAxis: {
-                type: 'value',
-                position: 'top',
-                splitLine: {
-                    lineStyle: {
-                        type: 'dashed'
+            });
+
+            form.render();
+            form.on('select(select1)', function(data){
+                console.log(data.elem); //得到select原始DOM对象
+                console.log(data.value); //得到被选中的值
+                console.log(data.othis); //得到美化后的DOM对象
+
+                if(data.value == 2){
+                    $('.bbox1').hide();
+                    $('.bbox2').show().css('width','100%');
+                    $('.bbox3').hide();
+                    $('.bbox4').hide();
+                }else if(data.value == 3){
+                    $('.bbox1').hide();
+                    $('.bbox2').hide();
+                    $('.bbox3').show().css('width','100%');
+                    $('.bbox4').hide();
+                }else{
+                    $('.bbox1').show();
+                    $('.bbox2').show().css('width','47%');
+                    $('.bbox3').show().css('width','47%');
+                    $('.bbox4').show();
+                }
+
+
+            });
+
+        });
+
+
+
+
+        $.ajax({
+            url:'/lime_demo',
+            type:'post',
+            data:{display_type:2},
+            success:function(msg){
+                console.log(msg)
+                var html = '';
+                var d1 = [];
+                var d2 = [];
+                for(var k in msg){
+
+                    html += '<tr>' +
+                        '<td>' + k + '</td>' +
+                        '<td>' + msg[k] + '</td>' +
+                        '</tr>';
+
+                    d1.unshift(k);
+                    //d2.push(msg[k]);
+                    if(msg[k]>0){
+                        d2.unshift({'value':msg[k],'label':{position:'right'}});
+                    }else if(msg[k]<0){
+                        d2.unshift({'value':msg[k],'label':{position:'left'}});
+                    }else{
+                        d2.unshift(msg[k]);
                     }
                 }
-            },
-            yAxis: {
-                type: 'category',
-                axisLine: {show: false},
-                axisLabel: {show: false},
-                axisTick: {show: false},
-                splitLine: {show: false},
-                data: ['ten', 'nine', 'eight', 'seven', 'six', 'five', 'four', 'three', 'two', 'one']
-            },
-            series: [
-                {
-                    name: '影响力',
-                    type: 'bar',
-                    stack: '总量',
-                    label: {
-                        show: true,
-                        formatter: '{b}'
-                    },
-                    data: [
-                        {value: -0.07, label: labelRight},
-                        {value: -0.09, label: labelRight},
-                        0.2, 0.44,
-                        {value: -0.23, label: labelRight},
-                        0.08,
-                        {value: -0.17, label: labelRight},
-                        0.47,
-                        {value: -0.36, label: labelRight},
-                        0.18
-                    ]
-                }
-            ]
-        };
+                option.yAxis.data = d1;
+                option.series[0].data = d2;
+                myChart.setOption(option);
+                $('#tbods1').html(html);
 
-        myChart.setOption(option);
+            },
+            error:function(err){
+                console.log(err)
+            }
+        });
+
+        $.ajax({
+            url:'/lime_demo',
+            type:'post',
+            data:{display_type:3},
+            success:function(msg){
+                console.log(msg)
+            },
+            error:function(err){
+                console.log(err)
+            }
+        });
+
+        $.ajax({
+            url:'/lime_demo',
+            type:'post',
+            data:{display_type:4},
+            success:function(msg){
+                console.log(msg)
+                var html = '';
+                for(var k in msg){
+
+                    html += '<tr>' +
+                        '<td>' + k + '</td>' +
+                        '<td>' + msg[k] + '</td>' +
+                        '</tr>';
+
+                }
+                $('#tbods2').html(html);
+            },
+            error:function(err){
+                console.log(err)
+            }
+        });
+
+        var myChart = echarts.init(document.getElementById('chart1'));
+
+
+
 
 
 
