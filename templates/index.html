@@ -70,14 +70,14 @@
                     <h2>Demo</h2>
                     <p>demo demo demo</p>
                 </header>
-                <div class="layui-form-item" style="width: 300px; margin: 0 auto 50px;">
+                <div class="layui-form-item" style="width: 580px; margin: 0 auto 50px;">
                     {#<label class="layui-form-label"></label>#}
                     <div class="layui-input-block">
                         <form class="layui-form">
                             <select name="type" lay-filter="select1">
-                                <option value="1">全部显示</option>
-                                <option value="2">显示所有的造成影响的属性和影响力</option>
-                                <option value="3">只显示影响最大的属性和影响力</option>
+                                <option value="1">全部显示->Show all results (including all texts and graphics result)</option>
+                                <option value="2">显示所有的造成影响的属性和影响力->Show all influential attributes in text</option>
+                                <option value="3">只显示影响最大的属性和影响力->Show the most influential attribute and value only</option>
                             </select>
                         </form>
                     </div>
@@ -230,6 +230,7 @@
             }
         ]
     };
+
     $(function(){
         window.onscroll = function () {
             //console.log(document.documentElement.scrollTop);
@@ -258,7 +259,7 @@
                 type:'post',
                 data:{display_type:1},
                 success:function(msg){
-                    console.log(msg)
+                    {#console.log(msg)#}
                     var demo1 = msg[0]*100;
                     var demo2 = msg[1]*100;
 
@@ -283,28 +284,60 @@
                 {#console.log(data.elem); //得到select原始DOM对象#}
                 {#console.log(data.value); //得到被选中的值#}
                 {#console.log(data.othis); //得到美化后的DOM对象#}
-
-                if(data.value == 3){
+                var num = 0;
+                if(data.value == 2){
                     $('.bbox1').hide();
                     $('.bbox2').show().css('width','100%');
                     $('.bbox3').hide();
                     $('.bbox4').hide();
-                }else if(data.value == 2){
+                    return false;
+                }else if(data.value == 3){
                     $('.bbox1').hide();
                     $('.bbox2').hide();
                     $('.bbox3').show().css('width','100%');
                     $('.bbox4').hide();
+                    num = 3;
                 }else{
                     $('.bbox1').show();
                     $('.bbox2').show().css('width','47%');
                     $('.bbox3').show().css('width','47%');
                     $('.bbox4').show();
+                    num = 4;
+
                 }
+                {#console.log(num);#}
+                $.ajax({
+                        url:'/lime_demo',
+                        type:'post',
+                        data:{display_type:num},
+                        success:function(msg){
+                            console.log(msg)
+                            var html = '';
+                            for(var k in msg){
+
+                                html += '<tr>' + '<td>' + k + '</td>';
+                                if(num == 3){
+                                    for(var ks in msg[k]){
+                                        var str = ks + msg[k][ks];
+                                    }
+                                    html += '<td>' + str + '</td>';
+                                }else{
+                                    html += '<td>' + msg[k] + '</td>';
+                                }
+
+                                html += '</tr>';
+
+                            }
+                            $('#tbods2').html(html);
+                        },
+                        error:function(err){
+                            console.log(err)
+                        }
+                    });
+
             });
-
-
             element.on('nav(navList)', function(data){
-                console.log(data);
+                {#console.log(data);#}
 
                 var navs = data.context.innerText;
                 if(navs == 'Home'){
@@ -319,62 +352,48 @@
                     $('#one').hide();
                     $('#two').hide();
                     $('#three').show();
+
+                    var myChart = echarts.init(document.getElementById('chart1'));
+                    $.ajax({
+                        url:'/lime_demo',
+                        type:'post',
+                        data:{display_type:2},
+                        success:function(msg){
+                            {#console.log(msg)#}
+                            var html = '';
+                            var d1 = [];
+                            var d2 = [];
+                            for(var k in msg){
+
+                                html += '<tr>' +
+                                    '<td>' + k + '</td>' +
+                                    '<td>' + msg[k] + '</td>' +
+                                    '</tr>';
+
+                                d1.unshift(k);
+                                //d2.push(msg[k]);
+                                if(msg[k]>0){
+                                    d2.unshift({'value':msg[k],'label':{position:'right'}});
+                                }else if(msg[k]<0){
+                                    d2.unshift({'value':msg[k],'label':{position:'left'}});
+                                }else{
+                                    d2.unshift(msg[k]);
+                                }
+                            }
+                            option.yAxis.data = d1;
+                            option.series[0].data = d2;
+                            myChart.setOption(option);
+                            $('#tbods1').html(html);
+
+                        },
+                        error:function(err){
+                            console.log(err)
+                        }
+                    });
                 }
 
             });
 
-        });
-
-
-
-
-        $.ajax({
-            url:'/lime_demo',
-            type:'post',
-            data:{display_type:2},
-            success:function(msg){
-                console.log(msg)
-                var html = '';
-                var d1 = [];
-                var d2 = [];
-                for(var k in msg){
-
-                    html += '<tr>' +
-                        '<td>' + k + '</td>' +
-                        '<td>' + msg[k] + '</td>' +
-                        '</tr>';
-
-                    d1.unshift(k);
-                    //d2.push(msg[k]);
-                    if(msg[k]>0){
-                        d2.unshift({'value':msg[k],'label':{position:'right'}});
-                    }else if(msg[k]<0){
-                        d2.unshift({'value':msg[k],'label':{position:'left'}});
-                    }else{
-                        d2.unshift(msg[k]);
-                    }
-                }
-                option.yAxis.data = d1;
-                option.series[0].data = d2;
-                myChart.setOption(option);
-                $('#tbods1').html(html);
-
-            },
-            error:function(err){
-                console.log(err)
-            }
-        });
-
-        $.ajax({
-            url:'/lime_demo',
-            type:'post',
-            data:{display_type:3},
-            success:function(msg){
-                console.log(msg)
-            },
-            error:function(err){
-                console.log(err)
-            }
         });
 
         $.ajax({
@@ -382,7 +401,7 @@
             type:'post',
             data:{display_type:4},
             success:function(msg){
-                console.log(msg)
+                {#console.log(msg)#}
                 var html = '';
                 for(var k in msg){
 
@@ -399,7 +418,8 @@
             }
         });
 
-        var myChart = echarts.init(document.getElementById('chart1'));
+
+
 
     })
 
