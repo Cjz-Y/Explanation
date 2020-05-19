@@ -49,6 +49,12 @@
 		-webkit-text-size-adjust: none;
 	}
 
+	.clearfix:before {
+		content: '';
+		display: block;
+		clear: both;
+		height: 0;
+	}
 /* Box Model */
 
 	*, *:before, *:after {

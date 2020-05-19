@@ -10,17 +10,12 @@
     .layui-input-block{margin:0;}
     .flex{margin-bottom:40px;}
     dl dd{margin-left:0;text-align:left;}
-    .mainly {width:86%; margin:0 auto;}
-    .layui-nav{background-color: #555967;}
-    {##one{display:none;}#}
-    #two{display:none;}
-    #three{display:none;}
 </style>
 </head>
 <body>
 
 <!-- Header -->
-<header id="header" style="display:none;">
+<header id="header">
 	<div class="inner">
 		<a href="/" class="logo">Lime</a>
 		<nav id="nav">
@@ -35,116 +30,118 @@
 <!-- Banner -->
 <section id="banner">
 	<h1>Welcome to Lime</h1>
-	<p>Welcome to Lime. Welcome to Lime. Welcome to Lime.</p>
+	<p>Welcome to Lime. Welcome to Lime. Welcome to Lime</p>
+</section>
+
+<!-- One -->
+<a href="#" name="home"></a>
+<section id="one" class="wrapper">
+    <a href="#" name="home"></a>
+	<div class="inner">
+		<header>
+			<h2>Home</h2>
+			<p>Home Home Home Home</p>
+		</header>
+		<div class="flex flex-4">
+
+		</div>
+	</div>
+</section>
+
+<!-- Two -->
+<a href="#" name="lime"></a>
+<section id="two" class="wrapper style1 special">
+	<div class="inner">
+		<header>
+			<h2>Lime</h2>
+			<p>Lime Lime Lime Lime</p>
+		</header>
+		<div class="flex flex-4">
+
+		</div>
+	</div>
 </section>
 
 <!-- Three -->
-<div class="mainly layui-row">
-    <div class="layui-col-xs3" style="padding: 6em 0;">
-        <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="navList" style="margin-right: 10px;">
-            <li class="layui-nav-item layui-this"><a href="javascript:;">Home</a></li>
-            <li class="layui-nav-item"><a href="javascript:;">Lime</a></li>
-            <li class="layui-nav-item"><a href="javascript:;">Demo</a></li>
-        </ul>
-    </div>
-    <div class="layui-col-xs9">
-        <section id="one" class="wrapper specia">
-            <div class="inner">
-                <header class="align-center">
-                    <h2>Home</h2>
-                    <p>Home Home Home</p>
-                </header>
+<a href="#" name="demo"></a>
+<section id="three" class="wrapper special">
+	<div class="inner">
+		<header class="align-center">
+			<h2>Demo</h2>
+			<p>demo demo demo</p>
+		</header>
+        <div class="layui-form-item" style="width: 300px; margin: 0 auto 50px;">
+{#            <label class="layui-form-label"></label>#}
+            <div class="layui-input-block">
+                <form class="layui-form">
+                    <select name="type" lay-filter="select1">
+                        <option value="1">全部显示</option>
+                        <option value="2">显示所有的造成影响的属性和影响力</option>
+                        <option value="3">只显示影响最大的属性和影响力</option>
+                    </select>
+                </form>
             </div>
-        </section>
-        <section id="two" class="wrapper specia">
-            <div class="inner">
-                <header class="align-center">
-                    <h2>Lime</h2>
-                    <p>Lime Lime Lime</p>
-                </header>
-            </div>
-        </section>
-        <section id="three" class="wrapper special">
-            <div class="inner">
-                <header class="align-center">
-                    <h2>Demo</h2>
-                    <p>demo demo demo</p>
-                </header>
-                <div class="layui-form-item" style="width: 300px; margin: 0 auto 50px;">
-                    {#<label class="layui-form-label"></label>#}
-                    <div class="layui-input-block">
-                        <form class="layui-form">
-                            <select name="type" lay-filter="select1">
-                                <option value="1">全部显示</option>
-                                <option value="2">显示所有的造成影响的属性和影响力</option>
-                                <option value="3">只显示影响最大的属性和影响力</option>
-                            </select>
-                        </form>
-                    </div>
+        </div>
+        <div class="flex bbox1">
+            <article style="width:100%;">
+                <h3>Prediction probabilities</h3>
+				<div class="layui-progress layui-progress-big" lay-showPercent="true" lay-filter="demo1" style="margin:20px 0;">
+                  <div class="layui-progress-bar" lay-percent="0" id="demo1"></div>
                 </div>
-                <div class="flex bbox1">
-                    <article style="width:100%;">
-                        <h3>Prediction probabilities</h3>
-                        <div class="layui-progress layui-progress-big" lay-showPercent="true" lay-filter="demo1" style="margin:20px 0;">
-                          <div class="layui-progress-bar" lay-percent="0" id="demo1"></div>
-                        </div>
-                        <div class="layui-progress layui-progress-big" lay-showPercent="true" lay-filter="demo2">
-                          <div class="layui-progress-bar layui-bg-blue" lay-percent="0" id="demo2"></div>
-                        </div>
-                    </article>
+                <div class="layui-progress layui-progress-big" lay-showPercent="true" lay-filter="demo2">
+                  <div class="layui-progress-bar layui-bg-blue" lay-percent="0" id="demo2"></div>
                 </div>
-                <div class="flex flex-2">
-                    <article class="bbox2">
-                        <table class="layui-table">
-                          <thead>
-                            <tr>
-                              <th>Feature</th>
-                              <th>Value</th>
-                            </tr>
-                          </thead>
-                          <tbody id="tbods1">
-                            {% comment %}<tr>
-                              <td>贤心</td>
-                              <td>2016-11-29</td>
-                            </tr>
-                            <tr>
-                              <td>许闲心</td>
-                              <td>2016-11-28</td>
-                            </tr>{% endcomment %}
-                          </tbody>
-                        </table>
-                    </article>
-                    <article class="bbox3">
-                        <table class="layui-table">
-                          <thead>
-                            <tr>
-                              <th>Feature</th>
-                              <th>Value</th>
-                            </tr>
-                          </thead>
-                          <tbody id="tbods2">
-                            {% comment %}<tr>
-                              <td>贤心</td>
-                              <td>2016-11-29</td>
-                            </tr>
-                            <tr>
-                              <td>许闲心</td>
-                              <td>2016-11-28</td>
-                            </tr>{% endcomment %}
-                          </tbody>
-                        </table>
-                    </article>
-                </div>
-                <div class="flex bbox4">
-                    <article style="width:100%; height:500px;">
-                        <div id="chart1" style="width:100%; height:100%;"></div>
-                    </article>
-                </div>
-            </div>
-        </section>
-    </div>
-
-</div>
+			</article>
+        </div>
+		<div class="flex flex-2">
+			<article class="bbox2">
+                <table class="layui-table">
+                  <thead>
+                    <tr>
+                      <th>Feature</th>
+                      <th>Value</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbods1">
+                    {% comment %}<tr>
+                      <td>贤心</td>
+                      <td>2016-11-29</td>
+                    </tr>
+                    <tr>
+                      <td>许闲心</td>
+                      <td>2016-11-28</td>
+                    </tr>{% endcomment %}
+                  </tbody>
+                </table>
+			</article>
+			<article class="bbox3">
+				<table class="layui-table">
+                  <thead>
+                    <tr>
+                      <th>Feature</th>
+                      <th>Value</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbods2">
+                    {% comment %}<tr>
+                      <td>贤心</td>
+                      <td>2016-11-29</td>
+                    </tr>
+                    <tr>
+                      <td>许闲心</td>
+                      <td>2016-11-28</td>
+                    </tr>{% endcomment %}
+                  </tbody>
+                </table>
+			</article>
+		</div>
+        <div class="flex bbox4">
+            <article style="width:100%; height:500px;">
+                <div id="chart1" style="width:100%; height:100%;"></div>
+			</article>
+        </div>
+	</div>
+</section>
 
 <!-- Footer -->
 <footer id="footer">
@@ -280,9 +277,9 @@
 
             form.render();
             form.on('select(select1)', function(data){
-                {#console.log(data.elem); //得到select原始DOM对象#}
-                {#console.log(data.value); //得到被选中的值#}
-                {#console.log(data.othis); //得到美化后的DOM对象#}
+                console.log(data.elem); //得到select原始DOM对象
+                console.log(data.value); //得到被选中的值
+                console.log(data.othis); //得到美化后的DOM对象
 
                 if(data.value == 2){
                     $('.bbox1').hide();
@@ -300,26 +297,7 @@
                     $('.bbox3').show().css('width','47%');
                     $('.bbox4').show();
                 }
-            });
 
-
-            element.on('nav(navList)', function(data){
-                console.log(data);
-
-                var navs = data.context.innerText;
-                if(navs == 'Home'){
-                    $('#one').show();
-                    $('#two').hide();
-                    $('#three').hide();
-                }else if(navs == 'Lime'){
-                    $('#one').hide();
-                    $('#two').show();
-                    $('#three').hide();
-                }else if(navs == 'Demo'){
-                    $('#one').hide();
-                    $('#two').hide();
-                    $('#three').show();
-                }
 
             });
 
@@ -400,6 +378,11 @@
         });
 
         var myChart = echarts.init(document.getElementById('chart1'));
+
+
+
+
+
 
     })
 
