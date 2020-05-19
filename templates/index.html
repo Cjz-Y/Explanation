@@ -75,9 +75,9 @@
                     <div class="layui-input-block">
                         <form class="layui-form">
                             <select name="type" lay-filter="select1">
-                                <option value="1">全部显示->Show all results (including all texts and graphics result)</option>
-                                <option value="2">显示所有的造成影响的属性和影响力->Show all influential attributes in text</option>
-                                <option value="3">只显示影响最大的属性和影响力->Show the most influential attribute and value only</option>
+                                <option value="1">Show all results (including all texts and graphics result)</option>
+                                <option value="2">Show all influential attributes in text</option>
+                                <option value="3">Show the most influential attribute and value only</option>
                             </select>
                         </form>
                     </div>
@@ -209,7 +209,7 @@
         },
         series: [
             {
-                name: '影响力',
+                name: ' Influential values',
                 type: 'bar',
                 stack: '总量',
                 label: {
@@ -315,15 +315,15 @@
                             var html = '';
                             for(var k in msg){
 
-                                html += '<tr>' + '<td>' + k + '</td>';
                                 if(num == 3){
+
                                     for(var ks in msg[k]){
-                                        var str = ks + msg[k][ks];
+                                        html += '<tr>' + '<td>' + ks + '</td>' + '<td>' + msg[k][ks] + '</td>';
                                     }
-                                    html += '<td>' + str + '</td>';
                                 }else{
-                                    html += '<td>' + msg[k] + '</td>';
+                                    html += '<tr>' + '<td>' + k + '</td>' + '<td>' + msg[k] + '</td>';
                                 }
+
 
                                 html += '</tr>';
 
