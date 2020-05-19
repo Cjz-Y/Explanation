@@ -316,11 +316,13 @@
                             for(var k in msg){
 
                                 if(num == 3){
-
+                                    $('#tbods2').prev().find('tr').html('<th>Type</th><th>Feature</th><th>Value</th>')
+                                    html += '<tr>' + '<td>' + k + '</td>';
                                     for(var ks in msg[k]){
-                                        html += '<tr>' + '<td>' + ks + '</td>' + '<td>' + msg[k][ks] + '</td>';
+                                        html += '<td>' + ks + '</td>' + '<td>' + msg[k][ks] + '</td>';
                                     }
                                 }else{
+                                    $('#tbods2').prev().find('tr').html('<th>Feature</th><th>Value</th>');
                                     html += '<tr>' + '<td>' + k + '</td>' + '<td>' + msg[k] + '</td>';
                                 }
 
@@ -411,6 +413,7 @@
                         '</tr>';
 
                 }
+                $('#tbods2').prev().find('tr').html('<th>Feature</th><th>Value</th>');
                 $('#tbods2').html(html);
             },
             error:function(err){
