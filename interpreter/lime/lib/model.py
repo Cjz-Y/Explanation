@@ -16,9 +16,10 @@ from interpreter.lime.common.constant import *
 
 class Model():
 
-    def __init__(self):
+    def __init__(self, num_features):
         self.insur_dataset = InsuranceDataset()
         self.encode_onehot = encode_onehot()
+        self.num_features = num_features
 
     def pd_to_np(self, pd_data):
         return pd.DataFrame.to_numpy(pd_data)
@@ -82,6 +83,6 @@ class Model():
         # pick a random instance
         # i= np.random.randint(0, test.shape[0])
 
-        exp = explainer.explain_instance(test[i], predict_fn, num_features=10)
+        exp = explainer.explain_instance(test[i], predict_fn, num_features=self.num_features)
 
         return exp
