@@ -21,14 +21,15 @@ def lime_demo(request):
         return render(request, 'index.html')
     else:
         display_type = int(request.POST.get('display_type', '-1'))
+        feature_number = request.POST.get('feature_number', '10')
         if display_type == 1:
-            return JsonResponse(LIME_EXPLANATION.predict_proba())
+            return JsonResponse(LIME_EXPLANATION.get(feature_number).predict_proba())
         elif display_type == 2:
-            return JsonResponse(LIME_EXPLANATION.feature_list())
+            return JsonResponse(LIME_EXPLANATION.get(feature_number).feature_list())
         elif display_type == 3:
-            return JsonResponse(LIME_EXPLANATION.feature_max())
+            return JsonResponse(LIME_EXPLANATION.get(feature_number).feature_max())
         elif display_type == 4:
-            return JsonResponse(LIME_EXPLANATION.feature_value())
+            return JsonResponse(LIME_EXPLANATION.get(feature_number).feature_value())
 
         return render(request, 'index.html')
 
