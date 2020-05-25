@@ -43,7 +43,7 @@
     <div class="layui-col-xs3" style="padding: 6em 0;">
         <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="navList" style="margin-right: 10px;">
             <li class="layui-nav-item layui-this"><a href="javascript:;">Home</a></li>
-            <li class="layui-nav-item"><a href="javascript:;">Lime</a></li>
+            {% comment %}<li class="layui-nav-item"><a href="javascript:;">Lime</a></li>{% endcomment %}
             <li class="layui-nav-item"><a href="javascript:;">Demo</a></li>
         </ul>
     </div>
@@ -75,46 +75,16 @@
                     <div class="layui-input-block">
                         <form class="layui-form">
                             <select name="type" lay-filter="select1">
-                                <option value="1">Show all results (including all texts and graphics result)</option>
-                                <option value="2">Show all influential attributes in text</option>
-                                <option value="3">Show the most influential attribute and value only</option>
+                                <option value="10">Ten feature importances</option>
+                                <option value="5">five feature importances</option>
+                                <option value="2">two feature importance</option>
                             </select>
                         </form>
                     </div>
                 </div>
-                <div class="flex bbox1">
-                    <article style="width:100%;">
-                        <h3>Prediction probabilities</h3>
-                        <div class="layui-progress layui-progress-big" lay-showPercent="true" lay-filter="demo1" style="margin:20px 0;">
-                          <div class="layui-progress-bar" lay-percent="0" id="demo1"></div>
-                        </div>
-                        <div class="layui-progress layui-progress-big" lay-showPercent="true" lay-filter="demo2">
-                          <div class="layui-progress-bar layui-bg-blue" lay-percent="0" id="demo2"></div>
-                        </div>
-                    </article>
-                </div>
-                <div class="flex flex-2">
-                    <article class="bbox2">
-                        <table class="layui-table">
-                          <thead>
-                            <tr>
-                              <th>Feature</th>
-                              <th>Value</th>
-                            </tr>
-                          </thead>
-                          <tbody id="tbods1">
-                            {% comment %}<tr>
-                              <td>贤心</td>
-                              <td>2016-11-29</td>
-                            </tr>
-                            <tr>
-                              <td>许闲心</td>
-                              <td>2016-11-28</td>
-                            </tr>{% endcomment %}
-                          </tbody>
-                        </table>
-                    </article>
-                    <article class="bbox3">
+                <div class="flex">
+                    <article class="bbox3" style="width:100%">
+                        <h3>11111111111111111111111111</h3>
                         <table class="layui-table">
                           <thead>
                             <tr>
@@ -135,8 +105,20 @@
                         </table>
                     </article>
                 </div>
+                <div class="flex bbox1">
+                    <article style="width:100%;">
+                        <h3>Prediction probabilities  22222222222222222222222222</h3>
+                        <div class="layui-progress layui-progress-big" lay-showPercent="true" lay-filter="demo1" style="margin:20px 0;">
+                          <div class="layui-progress-bar" lay-percent="0" id="demo1"></div>
+                        </div>
+                        <div class="layui-progress layui-progress-big" lay-showPercent="true" lay-filter="demo2">
+                          <div class="layui-progress-bar layui-bg-blue" lay-percent="0" id="demo2"></div>
+                        </div>
+                    </article>
+                </div>
                 <div class="flex bbox4">
                     <article style="width:100%; height:500px;">
+                        <h3>333333333333333333333333333333</h3>
                         <div id="chart1" style="width:100%; height:100%;"></div>
                     </article>
                 </div>
@@ -284,32 +266,12 @@
                 {#console.log(data.elem); //得到select原始DOM对象#}
                 {#console.log(data.value); //得到被选中的值#}
                 {#console.log(data.othis); //得到美化后的DOM对象#}
-                var num = 0;
-                if(data.value == 2){
-                    $('.bbox1').hide();
-                    $('.bbox2').show().css('width','100%');
-                    $('.bbox3').hide();
-                    $('.bbox4').hide();
-                    return false;
-                }else if(data.value == 3){
-                    $('.bbox1').hide();
-                    $('.bbox2').hide();
-                    $('.bbox3').show().css('width','100%');
-                    $('.bbox4').hide();
-                    num = 3;
-                }else{
-                    $('.bbox1').show();
-                    $('.bbox2').show().css('width','47%');
-                    $('.bbox3').show().css('width','47%');
-                    $('.bbox4').show();
-                    num = 4;
-
-                }
+                var num = 4;
                 {#console.log(num);#}
                 $.ajax({
                         url:'/lime_demo',
                         type:'post',
-                        data:{display_type:num},
+                        data:{display_type:num,feature_number:data.value},
                         success:function(msg){
                             console.log(msg)
                             var html = '';
