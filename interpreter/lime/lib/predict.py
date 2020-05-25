@@ -21,13 +21,15 @@ class Singleton(type):
 class Predict():
     __metaclass__ = Singleton
 
-    def __init__(self):
+    def __init__(self, num_features):
         self.insur_dataset = InsuranceDataset()
         self.encode_onehot = encode_onehot()
-        self.model_predict = Model().xgb_predict()
+        self.num_features = num_features
+        self.model_predict = Model(self.num_features).xgb_predict()
 
     def predict_proba(self):
         """
+        graph2
         prediction probabilities,key is class name,value is probability.
         exmaple:{0: 0.8450577855110168, 1: 0.15494222939014435}
         :return:
@@ -38,6 +40,7 @@ class Predict():
 
     def feature_list(self):
         """
+        graph3
         text explanation.
             example:[('0.00 < HHInsurance <= 1.00', -0.34299729931535844), ('CarLoan <= 0.00', 0.20479311844631276)]
         :return:
@@ -79,18 +82,18 @@ class Predict():
 
     def feature_value(self):
         """
+        graph1
         get the feature and value.
         example;{'Age': '53.00', 'Job=retired': 'True', 'Marital=married': 'True', 'Education=secondary': 'True',
          'Balance': '665.00', 'HHInsurance': '1.00', 'CarLoan': '0.00', 'NoOfContacts': '2.00', 'DaysPassed': '-1.00',
           'PrevAttempts': '0.00'}
         :return:
         """
+        exp_list = self.feature_list()
         domain_mapper = self.model_predict.domain_mapper
         feature_names = domain_mapper.feature_names
         feature_values = domain_mapper.feature_values
-        return dict(zip(feature_names, feature_values))
-
-
-
-
-
+        feature_all_dic =  dict(zip(feature_names, feature_values))
+        # find common feature
+        feature_dic = {key: value for key, value in feature_all_dic.items() if key in str(exp_list.keys())}
+        return feature_dic
