@@ -268,36 +268,30 @@
                 {#console.log(data.othis); //得到美化后的DOM对象#}
                 var num = 4;
                 {#console.log(num);#}
+
+                //表格
                 $.ajax({
-                        url:'/lime_demo',
-                        type:'post',
-                        data:{display_type:num,feature_number:data.value},
-                        success:function(msg){
-                            console.log(msg)
-                            var html = '';
-                            for(var k in msg){
+                    url:'/lime_demo',
+                    type:'post',
+                    data:{display_type:num,feature_number:data.value},
+                    success:function(msg){
+                        console.log(msg)
+                        var html = '';
+                        for(var k in msg){
 
-                                if(num == 3){
-                                    $('#tbods2').prev().find('tr').html('<th>Type</th><th>Feature</th><th>Value</th>')
-                                    html += '<tr>' + '<td>' + k + '</td>';
-                                    for(var ks in msg[k]){
-                                        html += '<td>' + ks + '</td>' + '<td>' + msg[k][ks] + '</td>';
-                                    }
-                                }else{
-                                    $('#tbods2').prev().find('tr').html('<th>Feature</th><th>Value</th>');
-                                    html += '<tr>' + '<td>' + k + '</td>' + '<td>' + msg[k] + '</td>';
-                                }
+                            html += '<tr>' + '<td>' + k + '</td>' + '<td>' + msg[k] + '</td>';
+                            html += '</tr>';
 
-
-                                html += '</tr>';
-
-                            }
-                            $('#tbods2').html(html);
-                        },
-                        error:function(err){
-                            console.log(err)
                         }
-                    });
+                        $('#tbods2').html(html);
+                    },
+                    error:function(err){
+                        console.log(err)
+                    }
+                });
+                {#myChart = echarts.init(document.getElementById('chart1'));#}
+                //图表
+                echart1(data.value);
 
             });
             element.on('nav(navList)', function(data){
@@ -316,44 +310,8 @@
                     $('#one').hide();
                     $('#two').hide();
                     $('#three').show();
-
-                    var myChart = echarts.init(document.getElementById('chart1'));
-                    $.ajax({
-                        url:'/lime_demo',
-                        type:'post',
-                        data:{display_type:2},
-                        success:function(msg){
-                            {#console.log(msg)#}
-                            var html = '';
-                            var d1 = [];
-                            var d2 = [];
-                            for(var k in msg){
-
-                                html += '<tr>' +
-                                    '<td>' + k + '</td>' +
-                                    '<td>' + msg[k] + '</td>' +
-                                    '</tr>';
-
-                                d1.unshift(k);
-                                //d2.push(msg[k]);
-                                if(msg[k]>0){
-                                    d2.unshift({'value':msg[k],'label':{position:'right'}});
-                                }else if(msg[k]<0){
-                                    d2.unshift({'value':msg[k],'label':{position:'left'}});
-                                }else{
-                                    d2.unshift(msg[k]);
-                                }
-                            }
-                            option.yAxis.data = d1;
-                            option.series[0].data = d2;
-                            myChart.setOption(option);
-                            $('#tbods1').html(html);
-
-                        },
-                        error:function(err){
-                            console.log(err)
-                        }
-                    });
+                    myChart = echarts.init(document.getElementById('chart1'));
+                    echart1(10);
                 }
 
             });
@@ -375,7 +333,6 @@
                         '</tr>';
 
                 }
-                $('#tbods2').prev().find('tr').html('<th>Feature</th><th>Value</th>');
                 $('#tbods2').html(html);
             },
             error:function(err){
@@ -388,6 +345,44 @@
 
     })
 
+function echart1(nums){
+    $.ajax({
+        url:'/lime_demo',
+        type:'post',
+        data:{display_type:2,feature_number:nums},
+        success:function(msg){
+            {#console.log(msg)#}
+            var html = '';
+            var d1 = [];
+            var d2 = [];
+            for(var k in msg){
+
+                html += '<tr>' +
+                    '<td>' + k + '</td>' +
+                    '<td>' + msg[k] + '</td>' +
+                    '</tr>';
+
+                d1.unshift(k);
+                //d2.push(msg[k]);
+                if(msg[k]>0){
+                    d2.unshift({'value':msg[k],'label':{position:'right'}});
+                }else if(msg[k]<0){
+                    d2.unshift({'value':msg[k],'label':{position:'left'}});
+                }else{
+                    d2.unshift(msg[k]);
+                }
+            }
+            option.yAxis.data = d1;
+            option.series[0].data = d2;
+            myChart.setOption(option);
+            $('#tbods1').html(html);
+
+        },
+        error:function(err){
+            console.log(err)
+        }
+    });
+}
 </script>
 </body>
 </html>
